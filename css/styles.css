@@ -1,0 +1,108 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    min-height: 100vh;
+    background-image: url(/img/bg-6.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.box {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    /* background-color: yellow; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.food{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    /* border-radius: 100%; */
+    /* background-color: blue; */
+    transform: translate(-50%,-50%);
+    background-image: url(/img/food-2.png);
+    background-size: cover;
+    background-position: center;
+}
+.aero{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    transform: translate(-50%,-50%);
+    /* background-color: red; */
+    background-image: url(/img/fire.png);
+    background-size: cover;
+    background-position: center;
+}
+.score{
+    position: absolute;
+    width: 300px;
+    height: 60px;
+    background-color: #88551e;
+    opacity: 0.7;
+    left: 99%;
+    top: 98%;
+    transform: translate(-100%,-100%);
+    border-radius: 30px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: black;
+}
+.go-container{
+    position: absolute;
+    width: 800px;
+    height: 250px;
+    background-color: #5a2c0d;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0.7;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 100px;
+    border: 3px solid black;
+    z-index: 2;
+    visibility: hidden;
+}
+.game-over{
+    position: relative;
+    width: 800px;
+    height: 150px;
+    background-color: transparent;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 7rem;
+    font-weight: bold;
+}
+.refresh{
+    position: relative;
+    width: 800px;
+    height: 80px;
+    background-color: transparent;
+    left: 50%;
+    top: 5%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.5rem;
+}
