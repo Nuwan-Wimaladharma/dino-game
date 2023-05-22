@@ -1,3 +1,5 @@
+body.style.backgroundImage = 'url(img/bg-6.jpg)';
+
 const divElm = document.createElement('div');
 divElm.classList.add('box'); 
 document.body.append(divElm);
