@@ -1,12 +1,15 @@
+document.body.style.backgroundImage = `url('img/bg-6.jpg')`;
 const divElm = document.createElement('div');
 divElm.classList.add('box'); 
 document.body.append(divElm);
 
 const divFoodElm = document.createElement('div');
 divFoodElm.classList.add('food');
+divFoodElm.style.backgroundImage = `url('img/food-2.png')`;
 
 const divAerolightElm = document.createElement('div');
 divAerolightElm.classList.add('aero');
+divAerolightElm.style.backgroundImage = `url('img/fire.png')`;
 
 const divScoreElm = document.createElement('div');
 divScoreElm.classList.add('score');
