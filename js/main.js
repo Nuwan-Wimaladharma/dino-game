@@ -1,6 +1,7 @@
 const divElm = document.createElement('div');
 divElm.classList.add('box'); 
 document.body.append(divElm);
+divElm.style.top = `${innerHeight - 250}px`;
 
 const divFoodElm = document.createElement('div');
 divFoodElm.classList.add('food');
@@ -21,13 +22,32 @@ const selectContainer = document.querySelector('.go-container');
 
 const divGameOverElm = document.createElement('div');
 divGameOverElm.classList.add('game-over');
-selectContainer.append(divGameOverElm);
+divGameOverContainerElm.append(divGameOverElm);
 divGameOverElm.innerText = 'GAME OVER';
 
-const divRefreshElm = document.createElement('div');
-divRefreshElm.classList.add('refresh');
-selectContainer.append(divRefreshElm);
-divRefreshElm.innerText = 'REFRESH THE BROWSER TO PLAY AGAIN...';
+const btnRefresh = document.createElement('button');
+btnRefresh.classList.add('refresh');
+divGameOverContainerElm.append(btnRefresh);
+btnRefresh.innerText = 'PLAY AGAIN';
+
+btnRefresh.addEventListener('click', () => {
+    document.location.reload();
+});
+
+const divControls = document.createElement('div');
+divControls.classList.add('control-container');
+document.body.append(divControls);
+
+const divSpace = document.createElement('div');
+divSpace.classList.add('controls');
+divSpace.innerText = 'Space key - To jump';
+
+const divMove = document.createElement('div');
+divMove.classList.add('controls');
+divMove.innerText = 'Arrow keys - To move left & right'
+
+divControls.append(divSpace);
+divControls.append(divMove);
 
 let score = 0;
 
@@ -169,7 +189,7 @@ function doRun(){
 }
 function makeFood(){
     let foodX = 250 + Math.round(Math.random() * (innerWidth - 500));
-    let foodY = 620 - Math.round(Math.random() * 150);
+    let foodY = (0 + innerHeight -250) - Math.round(Math.random() * 150);
     xFood = foodX;
     yFood = foodY;
     document.body.append(divFoodElm);
@@ -184,9 +204,9 @@ function makeAerolite(){
     document.body.append(divAerolightElm);
     divAerolightElm.style.top = aeroLiteY + "px";
     divAerolightElm.style.left = aeroLiteX + "px";
-    aeroLiteY += 8;
+    aeroLiteY += 5;
 
-    if(aeroLiteY == 880){
+    if(aeroLiteY >= (innerHeight - 125)){
         aeroLiteY = 0;
         aeroLiteX = 250 + Math.round(Math.random() * (innerWidth - 500));
     }
@@ -290,7 +310,7 @@ tmrSpriteInterval = setInterval(() => {
         runLeft = false;
         divElm.style.backgroundImage = `url('img/Dead (${8}).png')`;
         divElm.style.width = '350px';
-        divElm.style.top = '600px';
+        divElm.style.top = `${innerHeight - 250}px`;
         divGameOverContainerElm.style.visibility = 'visible';
         clearInterval(tmrActionInterval);
         clearInterval(tmrSpriteInterval);
@@ -307,7 +327,7 @@ tmrSpriteInterval = setInterval(() => {
         runLeft = false;
         divElm.style.backgroundImage = `url('img/DeadLeft (${8}).png')`;
         divElm.style.width = '350px';
-        divElm.style.top = '600px';
+        divElm.style.top = `${innerHeight - 250}px`;
         divGameOverContainerElm.style.visibility = 'visible';
         clearInterval(tmrActionInterval);
         clearInterval(tmrSpriteInterval);
