@@ -1,7 +1,14 @@
 const divElm = document.createElement('div');
-divElm.classList.add('box'); 
+divElm.classList.add('box');
 document.body.append(divElm);
 divElm.style.top = `${innerHeight - 250}px`;
+
+const backgroundMusic = new Audio('audio/background-music.mp3');
+const ateFoodMusic = new Audio('audio/ate-food-music.mp3');
+const diedMusic = new Audio('audio/died-music.mp3');
+function playMusic(){
+    backgroundMusic.play();
+}
 
 const divFoodElm = document.createElement('div');
 divFoodElm.classList.add('food');
@@ -73,19 +80,23 @@ let dx = 0;
 
 document.addEventListener('keypress',(eventData) => {
     if(eventData.key === ' '){
+        backgroundMusic.play();
         jump = true;
     } 
 });
 
 document.body.addEventListener('keydown', (eventData)=> {
     if (eventData.code === ' '){
+        backgroundMusic.play();
         jump = true;
     }else if (eventData.code === 'ArrowRight'){
+        backgroundMusic.play();
         runRight = true;
         towardRight = true;
         towardLeft = false;
         dx = 2;
     }else if (eventData.code === 'ArrowLeft'){
+        backgroundMusic.play();
         runLeft = true;
         towardLeft = true;
         towardRight = false;
@@ -103,18 +114,6 @@ document.body.addEventListener('keyup', (eventData) => {
     }
 });
 
-document.body.addEventListener('keypress', (eventData) => {
-    if(eventData.key === 'a'){
-        ateFood = true;
-    }
-});
-
-document.body.addEventListener('keypress', (eventData) => {
-    if(eventData.key === 's'){
-        ateFood = false;
-    }
-});
-
 function stayIdle(){
     let animalHeadX = divElm.offsetLeft + 125;
     let animalHeadY = divElm.offsetTop + 20;
@@ -126,11 +125,14 @@ function stayIdle(){
     let deadSetY = (animalHeadY <= (yAerolight + 40)) && (animalHeadY >= (yAerolight - 40));
 
     if(foodSetX && foodSetY){
+        ateFoodMusic.play();
         divScoreElm.innerText = `SCORE: ${score}`;
         ateFood = true;
     }
     if(deadSetX && deadSetY){
         dead = true;
+        diedMusic.play();
+        backgroundMusic.pause();
     }
 }
 
@@ -156,11 +158,14 @@ function doJump(){
     let deadSetY = (animalHeadY <= (yAerolight + 40)) && (animalHeadY >= (yAerolight - 40));
 
     if(foodSetX && foodSetY){
+        ateFoodMusic.play();
         divScoreElm.innerText = `SCORE: ${score}`;
         ateFood = true;
     }
     if(deadSetX && deadSetY){
         dead = true;
+        diedMusic.play();
+        backgroundMusic.pause();
     }
 }
 function doRun(){
@@ -180,11 +185,14 @@ function doRun(){
     let deadSetY = (animalHeadY <= (yAerolight + 40)) && (animalHeadY >= (yAerolight - 40));
 
     if(foodSetX && foodSetY){
+        ateFoodMusic.play();
         divScoreElm.innerText = `SCORE: ${score}`;
         ateFood = true;
     }
     if(deadSetX && deadSetY){
         dead = true;
+        diedMusic.play();
+        backgroundMusic.pause();
     }
 }
 function makeFood(){
