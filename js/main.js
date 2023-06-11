@@ -69,6 +69,8 @@ let runLeft = false;
 let towardRight = false;
 let towardLeft = false;
 let ateFood = true;
+let ateFoodRight = true;
+let ateFoodLeft = true;
 let dead = false;
 
 let xFood = 0;
@@ -117,18 +119,26 @@ document.body.addEventListener('keyup', (eventData) => {
 
 function stayIdle(){
     let animalHeadX = divElm.offsetLeft + 125;
-    let animalHeadY = divElm.offsetTop + 20;
+    let animalHeadY = divElm.offsetTop + 100;
 
-    let foodSetX = (animalHeadX >= (xFood - 40)) && (animalHeadX <= xFood + 40);
-    let foodSetY = (animalHeadY <= (yFood + 40)) && (animalHeadY >= (yFood - 40));
+    let foodSetXRight = (animalHeadX + 65 >= (xFood - 40)) && (animalHeadX + 65 <= xFood + 40);
+    let foodSetYRight = (animalHeadY <= (yFood + 40)) && (animalHeadY >= (yFood - 40));
+
+    let foodSetXLeft = (animalHeadX - 65 >= (xFood - 40)) && (animalHeadX - 65 <= xFood + 40);
+    let foodSetYLeft = (animalHeadY <= (yFood + 40)) && (animalHeadY >= (yFood - 40));
 
     let deadSetX = (animalHeadX >= (xAerolight - 40)) && (animalHeadX <= xAerolight + 40);
     let deadSetY = (animalHeadY <= (yAerolight + 40)) && (animalHeadY >= (yAerolight - 40));
 
-    if(foodSetX && foodSetY){
+    if(towardRight && (foodSetXRight && foodSetYRight)){
         ateFoodMusic.play();
         divScoreElm.innerText = `SCORE: ${score}`;
-        ateFood = true;
+        ateFoodRight = true;
+    }
+    if(towardLeft && (foodSetXLeft && foodSetYLeft)){
+        ateFoodMusic.play();
+        divScoreElm.innerText = `SCORE: ${score}`;
+        ateFoodLeft = true;
     }
     if(deadSetX && deadSetY){
         dead = true;
@@ -150,18 +160,26 @@ function doJump(){
     }
 
     let animalHeadX = divElm.offsetLeft + 125;
-    let animalHeadY = divElm.offsetTop + 20;
+    let animalHeadY = divElm.offsetTop + 100;
 
-    let foodSetX = (animalHeadX >= (xFood - 40)) && (animalHeadX <= xFood + 40);
-    let foodSetY = (animalHeadY <= (yFood + 40)) && (animalHeadY >= (yFood - 40));
+    let foodSetXRight = (animalHeadX + 65 >= (xFood - 40)) && (animalHeadX + 65 <= xFood + 40);
+    let foodSetYRight = (animalHeadY <= (yFood + 40)) && (animalHeadY >= (yFood - 40));
+
+    let foodSetXLeft = (animalHeadX - 65 >= (xFood - 40)) && (animalHeadX - 65 <= xFood + 40);
+    let foodSetYLeft = (animalHeadY <= (yFood + 40)) && (animalHeadY >= (yFood - 40));
 
     let deadSetX = (animalHeadX >= (xAerolight - 40)) && (animalHeadX <= xAerolight + 40);
     let deadSetY = (animalHeadY <= (yAerolight + 40)) && (animalHeadY >= (yAerolight - 40));
 
-    if(foodSetX && foodSetY){
+    if(towardRight && (foodSetXRight && foodSetYRight)){
         ateFoodMusic.play();
         divScoreElm.innerText = `SCORE: ${score}`;
-        ateFood = true;
+        ateFoodRight = true;
+    }
+    if(towardLeft && (foodSetXLeft && foodSetYLeft)){
+        ateFoodMusic.play();
+        divScoreElm.innerText = `SCORE: ${score}`;
+        ateFoodLeft = true;
     }
     if(deadSetX && deadSetY){
         dead = true;
@@ -177,19 +195,28 @@ function doRun(){
     divElm.style.left = `${x}px`;
 
     let animalHeadX = divElm.offsetLeft + 125;
-    let animalHeadY = divElm.offsetTop + 20;
+    let animalHeadY = divElm.offsetTop + 100;
 
-    let foodSetX = (animalHeadX >= (xFood - 40)) && (animalHeadX <= xFood + 40);
-    let foodSetY = (animalHeadY <= (yFood + 40)) && (animalHeadY >= (yFood - 40));
+    let foodSetXRight = (animalHeadX + 65 >= (xFood - 40)) && (animalHeadX + 65 <= xFood + 40);
+    let foodSetYRight = (animalHeadY <= (yFood + 40)) && (animalHeadY >= (yFood - 40));
+
+    let foodSetXLeft = (animalHeadX + 65 >= (xFood - 40)) && (animalHeadX - 65 <= xFood + 40);
+    let foodSetYLeft = (animalHeadY <= (yFood + 40)) && (animalHeadY >= (yFood - 40));
 
     let deadSetX = (animalHeadX >= (xAerolight - 40)) && (animalHeadX <= xAerolight + 40);
     let deadSetY = (animalHeadY <= (yAerolight + 40)) && (animalHeadY >= (yAerolight - 40));
 
-    if(foodSetX && foodSetY){
+    if(towardRight && (foodSetXRight && foodSetYRight)){
         ateFoodMusic.play();
         divScoreElm.innerText = `SCORE: ${score}`;
-        ateFood = true;
+        ateFoodRight = true;
     }
+    if(towardLeft && (foodSetXLeft && foodSetYLeft)){
+        ateFoodMusic.play();
+        divScoreElm.innerText = `SCORE: ${score}`;
+        ateFoodLeft = true;
+    }
+
     if(deadSetX && deadSetY){
         dead = true;
         diedMusic.play();
@@ -306,10 +333,20 @@ tmrSpriteInterval = setInterval(() => {
     if(runLeft){
         drawRunLeft();
     }
-    if(ateFood){
+    // if(ateFood){
+    //     score += 10;
+    //     makeFood();
+    //     ateFood = false;
+    // }
+    if (ateFoodRight){
         score += 10;
         makeFood();
-        ateFood = false;
+        ateFoodRight = false;
+    }
+    if (ateFoodLeft){
+        score += 10;
+        makeFood();
+        ateFoodLeft = false;
     }
     if(dead && towardRight){
         deadRunRight();

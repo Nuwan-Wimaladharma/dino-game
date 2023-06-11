@@ -14,12 +14,12 @@ body{
     position: absolute;
     width: 250px;
     height: 250px;
-    /* background-color: yellow; */
+    /*background-color: yellow;*/
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 .food{
     position: absolute;
@@ -107,17 +107,6 @@ body{
 .refresh:hover{
     cursor: pointer;
     scale: 1.03;
-}
-.control-container{
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    align-items: center;
-    height: 60px;
-    width: 100vw;
-    left: 50%;
-    transform: translate(-50%,0);
 }
 .controls{
     height: 70px;
