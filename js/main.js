@@ -225,7 +225,7 @@ function doRun(){
 }
 function makeFood(){
     let foodX = 250 + Math.round(Math.random() * (innerWidth - 500));
-    let foodY = (0 + innerHeight -250) - Math.round(Math.random() * 150);
+    let foodY = (0 + innerHeight - 180) - Math.round(Math.random() * 150);
     xFood = foodX;
     yFood = foodY;
     document.body.append(divFoodElm);
