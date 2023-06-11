@@ -6,9 +6,6 @@ divElm.style.top = `${innerHeight - 250}px`;
 const backgroundMusic = new Audio('audio/background-music.mp3');
 const ateFoodMusic = new Audio('audio/ate-food-music.mp3');
 const diedMusic = new Audio('audio/died-music.mp3');
-function playMusic(){
-    backgroundMusic.play();
-}
 
 const divFoodElm = document.createElement('div');
 divFoodElm.classList.add('food');
@@ -21,29 +18,9 @@ divScoreElm.classList.add('score');
 document.body.append(divScoreElm);
 divScoreElm.innerText = 'SCORE: 0';
 
-const divGameOverContainerElm = document.createElement('div');
-divGameOverContainerElm.classList.add('go-container');
-document.body.append(divGameOverContainerElm);
-
-const selectContainer = document.querySelector('.go-container');
-
-const divGameOverElm = document.createElement('div');
-divGameOverElm.classList.add('game-over');
-divGameOverContainerElm.append(divGameOverElm);
-divGameOverElm.innerText = 'GAME OVER';
-
-const btnRefresh = document.createElement('button');
-btnRefresh.classList.add('refresh');
-divGameOverContainerElm.append(btnRefresh);
-btnRefresh.innerText = 'PLAY AGAIN';
-
-btnRefresh.addEventListener('click', () => {
-    document.location.reload();
-});
-
-const divControls = document.createElement('div');
-divControls.classList.add('control-container');
-document.body.append(divControls);
+const divGameStartContainer = document.createElement('div');
+divGameStartContainer.classList.add('game-start-container');
+document.body.append(divGameStartContainer);
 
 const divSpace = document.createElement('div');
 divSpace.classList.add('controls');
@@ -51,10 +28,38 @@ divSpace.innerText = 'Space key - To jump';
 
 const divMove = document.createElement('div');
 divMove.classList.add('controls');
-divMove.innerText = 'Arrow keys - To move left & right'
+divMove.innerText = 'Arrow keys - To move left & right';
 
-divControls.append(divSpace);
-divControls.append(divMove);
+const btnGameStart = document.createElement('button');
+btnGameStart.classList.add('play');
+btnGameStart.innerText = 'PLAY';
+
+divGameStartContainer.append(divSpace);
+divGameStartContainer.append(divMove);
+divGameStartContainer.append(btnGameStart);
+
+const divGameOverContainer = document.createElement('div');
+divGameOverContainer.classList.add('game-over-container');
+document.body.append(divGameOverContainer);
+
+const divGameOverContainerElm = document.createElement('div');
+divGameOverContainerElm.classList.add('go-container');
+
+const divGameOverElm = document.createElement('div');
+divGameOverElm.classList.add('game-over');
+divGameOverElm.innerText = 'GAME OVER';
+
+const btnRefresh = document.createElement('button');
+btnRefresh.classList.add('refresh');
+btnRefresh.innerText = 'PLAY AGAIN';
+
+divGameOverContainerElm.append(divGameOverElm);
+divGameOverContainerElm.append(btnRefresh);
+divGameOverContainer.append(divGameOverContainerElm);
+
+btnRefresh.addEventListener('click', () => {
+    document.location.reload();
+});
 
 let score = 0;
 
@@ -80,23 +85,19 @@ let dx = 0;
 
 document.addEventListener('keypress',(eventData) => {
     if(eventData.key === ' '){
-        backgroundMusic.play();
         jump = true;
     } 
 });
 
 document.body.addEventListener('keydown', (eventData)=> {
     if (eventData.code === ' '){
-        backgroundMusic.play();
         jump = true;
     }else if (eventData.code === 'ArrowRight'){
-        backgroundMusic.play();
         runRight = true;
         towardRight = true;
         towardLeft = false;
         dx = 2;
     }else if (eventData.code === 'ArrowLeft'){
-        backgroundMusic.play();
         runLeft = true;
         towardLeft = true;
         towardRight = false;
@@ -319,7 +320,8 @@ tmrSpriteInterval = setInterval(() => {
         divElm.style.backgroundImage = `url('img/Dead (${8}).png')`;
         divElm.style.width = '350px';
         divElm.style.top = `${innerHeight - 250}px`;
-        divGameOverContainerElm.style.visibility = 'visible';
+        divGameOverContainer.style.display = 'block';
+        divGameStartContainer.style.display = 'none';
         clearInterval(tmrActionInterval);
         clearInterval(tmrSpriteInterval);
         clearInterval(tmrAerolightInterval);
@@ -336,7 +338,8 @@ tmrSpriteInterval = setInterval(() => {
         divElm.style.backgroundImage = `url('img/DeadLeft (${8}).png')`;
         divElm.style.width = '350px';
         divElm.style.top = `${innerHeight - 250}px`;
-        divGameOverContainerElm.style.visibility = 'visible';
+        divGameOverContainer.style.display = 'block';
+        divGameStartContainer.style.display = 'none';
         clearInterval(tmrActionInterval);
         clearInterval(tmrSpriteInterval);
         clearInterval(tmrAerolightInterval);
@@ -345,7 +348,12 @@ tmrSpriteInterval = setInterval(() => {
         tmrAerolightInterval = null;
     }
 },50);
-tmrAerolightInterval = setInterval(() => {
-    makeAerolite();
-},5);
+
+btnGameStart.addEventListener('click', () => {
+    tmrAerolightInterval = setInterval(() => {
+        makeAerolite();
+    },5);
+    backgroundMusic.play();
+    divGameStartContainer.style.visibility = 'hidden';
+});
 
